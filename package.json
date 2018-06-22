@@ -1,11 +1,12 @@
 {
   "name": "html-renderer-webpack-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A webpack plugin for rendering static html pages",
   "author": "Iiro Jäppinen <iiro@jappinen.fi> (https://iiro.fi)",
   "license": "MIT",
-  "repository": "gitlab:iiroj/webpack-static-html-renderer",
-  "bugs": "https://gitlab.com/iiroj/webpack-static-html-renderer/issues",
+  "homepage": "https://gitlab.com/iiroj/html-renderer-webpack-plugin",
+  "repository": "gitlab:iiroj/html-renderer-webpack-plugin",
+  "bugs": "https://gitlab.com/iiroj/html-renderer-webpack-plugin/issues",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
