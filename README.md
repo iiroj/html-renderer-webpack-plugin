@@ -41,7 +41,7 @@ config.plugins.push(new HtmlRendererWebpackPlugin({
 
 This plugin provides a server-like environment for rendering static (React) html pages. It is useful for serverless environments as a static site generator.
 
-Pages are renderer from a supplied `paths: string[]` array that should include your supported (static) routes. It might be useful to import these from your router configuration.
+Pages are rendered from a supplied `paths: string[]` array that should include your supported (static) routes. It might be useful to import these from your router configuration.
 
 The plugin is supplied an async renderer function that, for example, renders your pages using `react-dom`'s `renderToString` and returns a complete HTML string. The default renderer function simply returns a page with javascript bundles and an empty `<div id="root>` tag.
 
