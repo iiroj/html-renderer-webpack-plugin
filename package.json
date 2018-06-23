@@ -1,6 +1,6 @@
 {
   "name": "html-renderer-webpack-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A webpack plugin for rendering static html pages",
   "author": "Iiro Jäppinen <iiro@jappinen.fi> (https://iiro.fi)",
   "license": "MIT",
@@ -23,7 +23,6 @@
     "webpack-sources": "^1.1.0"
   },
   "devDependencies": {
-    "@webpack-contrib/test-utils": "^0.1.3",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
