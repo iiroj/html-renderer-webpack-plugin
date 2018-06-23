@@ -2,6 +2,9 @@
 
 A webpack plugin for rendering static html pages.
 
+[![npm](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/html-renderer-webpack-plugin)
+
+
 ## Installation
 
 ```bash
