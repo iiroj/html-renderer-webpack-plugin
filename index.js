@@ -52,8 +52,13 @@ const groupAssetsByExtensions = assets =>
 
 const filenameFromPath = path => path.replace(/\/$/, '/index').replace(/^\//, '') + '.html';
 
-const getScriptTags = (publichPath, files) =>
-  files.map(file => `<script defer type="text/javascript" src="${publichPath}${file}"></script>`).join('\n');
+const getScriptTags = (publichPath, files) => {
+  let prefix = publichPath ? publichPath : '';
+  if (publichPath && !publichPath.endsWith('/')) {
+    prefix = prefix + '/';
+  }
+  return files.map(file => `<script defer type="text/javascript" src="${prefix}${file}"></script>`).join('\n');
+};
 
 const defaultRenderer = async ({ assets, publicPath }) =>
   '<!doctype html><head><meta charset="utf-8"><title>HtmlRendererWebpackPlugin</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><div id="root"></div>' +
