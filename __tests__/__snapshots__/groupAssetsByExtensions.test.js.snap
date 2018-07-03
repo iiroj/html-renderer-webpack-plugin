@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should group assets by extensions 1`] = `
+Object {
+  "": Array [
+    "85a81ee1",
+  ],
+  "css": Array [
+    "5e6d94fc.css",
+    "1e77c6d6.css",
+  ],
+  "jpg": Array [
+    "7caf52ec.jpg",
+  ],
+  "js": Array [
+    "5749aae7.js",
+    "2ff13846.js",
+  ],
+  "png": Array [
+    "676c1b7d.png",
+  ],
+}
+`;

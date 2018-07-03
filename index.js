@@ -65,3 +65,8 @@ const defaultRenderer = async ({ assets, publicPath }) =>
   getScriptTags(publicPath, assets.js || []);
 
 module.exports = HtmlRendererWebpackPlugin;
+
+module.exports.groupAssetsByExtensions = groupAssetsByExtensions;
+module.exports.filenameFromPath = filenameFromPath;
+module.exports.getScriptTags = getScriptTags;
+module.exports.defaultRenderer = defaultRenderer;

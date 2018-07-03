@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should append / to path if needed 1`] = `
+"<script defer type=\\"text/javascript\\" src=\\"/bar/5749aae7.js\\"></script>
+<script defer type=\\"text/javascript\\" src=\\"/bar/2ff13846.js\\"></script>"
+`;
+
+exports[`should generate absolute script tags 1 1`] = `
+"<script defer type=\\"text/javascript\\" src=\\"/5749aae7.js\\"></script>
+<script defer type=\\"text/javascript\\" src=\\"/2ff13846.js\\"></script>"
+`;
+
+exports[`should generate absolute script tags 2 1`] = `
+"<script defer type=\\"text/javascript\\" src=\\"/foo/5749aae7.js\\"></script>
+<script defer type=\\"text/javascript\\" src=\\"/foo/2ff13846.js\\"></script>"
+`;
+
+exports[`should generate relative script tags 1`] = `
+"<script defer type=\\"text/javascript\\" src=\\"5749aae7.js\\"></script>
+<script defer type=\\"text/javascript\\" src=\\"2ff13846.js\\"></script>"
+`;

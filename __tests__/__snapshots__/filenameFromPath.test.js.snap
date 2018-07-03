@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should generate filenames from paths 1`] = `
+Array [
+  "index.html",
+  "foo.html",
+  "bar/index.html",
+]
+`;
