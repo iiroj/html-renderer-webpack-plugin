@@ -3,7 +3,9 @@ const { defaultRenderer } = require('../index');
 const assets = { js: ['5749aae7.js', '2ff13846.js'] };
 const publicPath = '/';
 
-it('should generate html', async () => {
-  const html = await defaultRenderer({ assets, publicPath });
-  expect(html).toMatchSnapshot();
+describe('defaultRenderer', () => {
+  it('should generate html', async () => {
+    const html = await defaultRenderer({ assets, publicPath });
+    expect(html).toMatchSnapshot();
+  });
 });

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should group assets by extensions 1`] = `
+exports[`groupAssetsByExtensions should group assets by extensions 1`] = `
 Object {
   "": Array [
     "85a81ee1",

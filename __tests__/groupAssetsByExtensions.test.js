@@ -25,7 +25,9 @@ const assets = {
   })
 };
 
-it('should group assets by extensions', () => {
-  const assetsByExtensions = groupAssetsByExtensions(assets);
-  expect(assetsByExtensions).toMatchSnapshot();
+describe('groupAssetsByExtensions', () => {
+  it('should group assets by extensions', () => {
+    const assetsByExtensions = groupAssetsByExtensions(assets);
+    expect(assetsByExtensions).toMatchSnapshot();
+  });
 });
