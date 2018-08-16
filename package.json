@@ -18,7 +18,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "jest"
+    "test": "jest",
+    "version": "standard-version",
+    "prerelease": "npm run lint && npm run test",
+    "release": "git push --follow-tags origin master",
+    "postrelease": "npm publish"
   },
   "dependencies": {
     "webpack-sources": "^1.1.0"
@@ -35,6 +39,7 @@
     "eslint-plugin-standard": "^3.1.0",
     "jest": "^23.4.2",
     "prettier": "^1.14.2",
+    "standard-version": "^4.4.0",
     "webpack": "^4.16.5"
   },
   "keywords": [
