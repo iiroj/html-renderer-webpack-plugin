@@ -8,19 +8,22 @@
   <br/>
   <br/>
   <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin">
-    <img src="https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg?style=flat-square">
+    <img src="https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg">
   </a>
   <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin">
-    <img src="https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg?style=flat-square">
+    <img src="https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg">
   </a>
-  <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin/pipelines/">
-    <img src="https://img.shields.io/badge/GitLab-Pipeline-lightgrey.svg?style=flat-square">
+  <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin/commits/master">
+    <img alt="pipeline status" src="https://gitlab.com/iiroj/html-renderer-webpack-plugin/badges/master/pipeline.svg" />
+  </a>
+  <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin/commits/master">
+    <img alt="coverage report" src="https://gitlab.com/iiroj/html-renderer-webpack-plugin/badges/master/coverage.svg" />
   </a>
   <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json">
-    <img src="https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg?style=flat-square">
+    <img src="https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg">
   </a>
   <a href="https://gitlab.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json">
-    <img src="https://img.shields.io/david/dev/iiroj/html-renderer-webpack-plugin.svg?style=flat-square">
+    <img src="https://img.shields.io/david/dev/iiroj/html-renderer-webpack-plugin.svg">
   </a>
   <br/>
   <br/>
