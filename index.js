@@ -32,7 +32,7 @@ class HtmlRendererWebpackPlugin {
   apply(compiler) {
     if (compiler.hooks) {
       // Webpack 4
-      compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);
+      compiler.hooks.afterCompile.tapAsync(PLUGIN_NAME, this.plugin);
     } else {
       // Webpack 3
       compiler.plugin('emit', this.plugin);
