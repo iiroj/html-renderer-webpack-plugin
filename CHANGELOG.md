@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v1.2.0...v1.3.0) (2018-10-02)
+
+
+### Features
+
+* Add better support for hot-reloading ([2fec34a](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/2fec34a))
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v1.1.4...v1.2.0) (2018-09-28)
 
