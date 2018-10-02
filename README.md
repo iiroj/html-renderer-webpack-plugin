@@ -109,3 +109,21 @@ The webpack's `stats` object. This is useful for [webpack-flush-chunk](https://g
 ## Babel
 
 Because your renderer function typically imports your `<App />`, you probably need [babel](https://babeljs.io/). The easiest way is to run your webpack config through babel with `webpack --config webpack.config.babel.js`.
+
+## Working with Hot Reloading
+
+### TL;DR
+
+* In your `renderer` function, require your main React component instead of importing:
+  - `const App = require('src/components/App').default`
+* Add a `hotPath?: RegExp` option to `html-renderer-webpack-plugin` to watch for file changes in your preferred location:
+  - `hotPath: /\/src\//`
+* After compilation, `require.cache` will be invalidated and using `require` will result in updated code.
+
+### Longer Explanation
+
+A typical feature of a dev environment includes some [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/). When using `html-renderer-webpack-plugin`, you might want to ensure that when the client bundle gets hot-updated, also the HTML files are rendered with the content.
+
+By default, when using `import` to require you application code, for example `import App from 'src/components/App`, the resulting module will be cached in the node process. Thus, after recompiling your html files after a webpack HMR update, the html file will still contain the old version, because it is cached in the `require.cache`.
+
+To overcome this limitation, you can supply a `hotPath?: RegExp` option to this plugin. After a webpack compilation, it will use this RegExp to invalidate any matching paths in the `require.cache` (`node_modules` will always be ignored). Then, if you use `const App = require('src/components/App').default` inside your renderer function, it will be freshly required the next time the HTML file is created. This will result in "hot-reloading" working properly for statically rendered content.

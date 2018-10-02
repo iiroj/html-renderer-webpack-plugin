@@ -4,8 +4,9 @@ const PLUGIN_NAME = 'HtmlRendererWebpackPlugin';
 
 class HtmlRendererWebpackPlugin {
   constructor(options = {}) {
-    this.renderer = options.renderer || defaultRenderer;
+    this.hotPath = options.hotPath;
     this.paths = options.paths || [];
+    this.renderer = options.renderer || defaultRenderer;
 
     this.plugin = this.plugin.bind(this);
   }
@@ -24,6 +25,10 @@ class HtmlRendererWebpackPlugin {
       } catch (error) {
         compilation.errors.push(error.stack);
       }
+    }
+
+    if (this.hotPath) {
+      invalidateRequireCache(this.hotPath);
     }
 
     done();
@@ -63,6 +68,15 @@ const getScriptTags = (publichPath, files) => {
 const defaultRenderer = async ({ assets, publicPath }) =>
   '<!doctype html><head><meta charset="utf-8"><title>HtmlRendererWebpackPlugin</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><div id="root"></div>' +
   getScriptTags(publicPath, assets.js || []);
+
+const invalidateRequireCache = hotPathRegex => {
+  for (const id of Object.keys(require.cache)) {
+    if (!id.includes('node_modules') && hotPathRegex.test(id)) {
+      console.log(id);
+      delete require.cache[id];
+    }
+  }
+};
 
 module.exports = HtmlRendererWebpackPlugin;
 

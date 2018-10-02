@@ -11,6 +11,7 @@ export type Renderer = {
 }
 
 export type Options = {
+  hotPath?: RegExp,
   paths: string[];
   renderer: (props: Renderer) => Promise<string>;
 }
