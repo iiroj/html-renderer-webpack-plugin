@@ -1,19 +1,25 @@
-import { Options } from 'webpack';
+import { Plugin, Stats } from "webpack";
 
-export type Renderer = {
-  assets?: {
-    [key: string]: string[]
+export = HtmlRendererWebpackPlugin;
+
+declare class HtmlRendererWebpackPlugin extends Plugin {
+  constructor(options?: HtmlRendererWebpackPlugin.Options);
+}
+
+declare namespace HtmlRendererWebpackPlugin {
+  interface Renderer {
+    assets?: {
+      [key: string]: string[];
+    };
+    filename: string;
+    path: string;
+    publicPath: string;
+    stats: Stats;
   }
-  filename: string;
-  path: string;
-  publicPath: string;
-  stats: Options.Stats;
-}
 
-export type Options = {
-  hotPath?: RegExp,
-  paths: string[];
-  renderer: (props: Renderer) => Promise<string>;
+  interface Options {
+    hotPath?: RegExp;
+    paths: string[];
+    renderer: (props: Renderer) => string | Promise<string>;
+  }
 }
-
-export default class WebpackStaticHtmlRenderer<Options> {}

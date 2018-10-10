@@ -78,8 +78,9 @@ const invalidateRequireCache = hotPathRegex => {
 };
 
 module.exports = HtmlRendererWebpackPlugin;
-
 module.exports.groupAssetsByExtensions = groupAssetsByExtensions;
 module.exports.filenameFromPath = filenameFromPath;
 module.exports.getScriptTags = getScriptTags;
 module.exports.defaultRenderer = defaultRenderer;
+
+exports.default = HtmlRendererWebpackPlugin;
