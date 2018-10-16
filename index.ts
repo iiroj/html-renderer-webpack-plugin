@@ -66,7 +66,7 @@ export default class HtmlRendererWebpackPlugin {
         invalidateRequireCache(this.hotPath)
       );
     }
-    compiler.hooks.afterCompile.tapAsync(PLUGIN_NAME, this.plugin);
+    compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);
   }
 }
 
