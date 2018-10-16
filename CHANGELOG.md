@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.4"></a>
+## [3.0.4](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v3.0.3...v3.0.4) (2018-10-16)
+
+
+### Bug Fixes
+
+* use emit instead of afterCompile hook to ensure assets exist ([838eb60](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/838eb60))
+
+
+
 <a name="3.0.3"></a>
 ## [3.0.3](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v3.0.2...v3.0.3) (2018-10-16)
 
