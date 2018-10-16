@@ -27,21 +27,14 @@ class HtmlRendererWebpackPlugin {
       }
     }
 
-    if (this.hotPath) {
-      invalidateRequireCache(this.hotPath);
-    }
-
     done();
   }
 
   apply(compiler) {
-    if (compiler.hooks) {
-      // Webpack 4
-      compiler.hooks.afterCompile.tapAsync(PLUGIN_NAME, this.plugin);
-    } else {
-      // Webpack 3
-      compiler.plugin('emit', this.plugin);
+    if (this.hotPath) {
+      compiler.hooks.beforeCompile.tap(PLUGIN_NAME, invalidateRequireCache(this.hotPath));
     }
+    compiler.hooks.afterCompile.tapAsync(PLUGIN_NAME, this.plugin);
   }
 }
 
@@ -69,7 +62,7 @@ const defaultRenderer = async ({ assets, publicPath }) =>
   '<!doctype html><head><meta charset="utf-8"><title>HtmlRendererWebpackPlugin</title><meta name="viewport" content="width=device-width, initial-scale=1"></head><div id="root"></div>' +
   getScriptTags(publicPath, assets.js || []);
 
-const invalidateRequireCache = hotPathRegex => {
+const invalidateRequireCache = hotPathRegex => () => {
   for (const id of Object.keys(require.cache)) {
     if (!id.includes('node_modules') && hotPathRegex.test(id)) {
       delete require.cache[id];
