@@ -18,10 +18,10 @@
   },
   "scripts": {
     "lint": "tslint -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json",
     "test": "jest",
-    "build": "tsc --build --verbose tsconfig.json",
-    "clean": "tsc --build --clean tsconfig.json",
+    "build": "tsc --build --verbose tsconfig.build.json",
+    "clean": "tsc --build --clean tsconfig.build.json",
     "version": "standard-version",
     "prerelease": "npm run lint && npm run test",
     "release": "git push --follow-tags origin master",

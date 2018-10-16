@@ -1,5 +1,5 @@
 import { RawSource } from "webpack-sources";
-import { groupAssetsByExtensions } from "../";
+import { groupAssetsByExtensions } from "../index";
 
 const assets = {
   "5749aae7.js": new RawSource("test"),

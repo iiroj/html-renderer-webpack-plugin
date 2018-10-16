@@ -39,6 +39,8 @@ export default class HtmlRendererWebpackPlugin {
     const { publicPath } = compilation.outputOptions || "";
     const assets = groupAssetsByExtensions(compilation.assets);
 
+    console.log(assets);
+
     for (const path of this.paths) {
       const filename = filenameFromPath(path);
 
@@ -70,9 +72,10 @@ export default class HtmlRendererWebpackPlugin {
   }
 }
 
+type ObjectOfRawsource = { [key: string]: RawSource };
 type ObjectOfArrays = { [key: string]: Array<string> };
 
-export const groupAssetsByExtensions = (assets: ObjectOfArrays) =>
+export const groupAssetsByExtensions = (assets: ObjectOfRawsource) =>
   Object.keys(assets).reduce((accumulator: ObjectOfArrays, asset: string) => {
     const ext = asset.slice(((asset.lastIndexOf(".") - 1) >>> 0) + 2);
     if (!accumulator[ext]) {
