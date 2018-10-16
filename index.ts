@@ -39,8 +39,6 @@ export default class HtmlRendererWebpackPlugin {
     const { publicPath } = compilation.outputOptions || "";
     const assets = groupAssetsByExtensions(compilation.assets);
 
-    console.log(assets);
-
     for (const path of this.paths) {
       const filename = filenameFromPath(path);
 
