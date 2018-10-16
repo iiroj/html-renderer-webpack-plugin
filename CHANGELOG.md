@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v2.0.0...v3.0.0) (2018-10-16)
+
+
+### Features
+
+* Rewrite plugin in TypeScript ([4bf17e3](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/4bf17e3))
+
+
+### BREAKING CHANGES
+
+* This changes everything
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v1.3.3...v2.0.0) (2018-10-16)
 
