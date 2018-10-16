@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v1.3.3...v2.0.0) (2018-10-16)
+
+
+### Bug Fixes
+
+* renderer is an optional type ([d8b7c55](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/d8b7c55))
+
+
+### Features
+
+* Run cache invalidation before compilation ([2463765](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/2463765))
+
+
+### BREAKING CHANGES
+
+* This commit removes support with Webpack 3, and it’s now declared as a peer dependency. Support was never tested with Webpack 3.
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v1.3.2...v1.3.3) (2018-10-10)
 
