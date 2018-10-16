@@ -20,6 +20,6 @@ declare namespace HtmlRendererWebpackPlugin {
   interface Options {
     hotPath?: RegExp;
     paths: string[];
-    renderer: (props: Renderer) => string | Promise<string>;
+    renderer?: (props: Renderer) => string | Promise<string>;
   }
 }
