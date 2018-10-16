@@ -16,6 +16,6 @@ exports[`getScriptTags should generate absolute script tags 2 1`] = `
 `;
 
 exports[`getScriptTags should generate relative script tags 1`] = `
-"<script defer type=\\"text/javascript\\" src=\\"5749aae7.js\\"></script>
-<script defer type=\\"text/javascript\\" src=\\"2ff13846.js\\"></script>"
+"<script defer type=\\"text/javascript\\" src=\\"/5749aae7.js\\"></script>
+<script defer type=\\"text/javascript\\" src=\\"/2ff13846.js\\"></script>"
 `;
