@@ -52,7 +52,7 @@ export default class HtmlRendererWebpackPlugin {
         });
         compilation.assets[filename] = new RawSource(html);
       } catch (error) {
-        compilation.errors.push(error.stack);
+        compilation.errors.push(error);
       }
     }
 
