@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.9"></a>
+## [3.0.9](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v3.0.8...v3.0.9) (2018-11-27)
+
+
+### Bug Fixes
+
+* push entire error to webpack's error collection ([24915f4](https://gitlab.com/iiroj/html-renderer-webpack-plugin/commit/24915f4))
+
+
+
 <a name="3.0.8"></a>
 ## [3.0.8](https://gitlab.com/iiroj/html-renderer-webpack-plugin/compare/v3.0.7...v3.0.8) (2018-11-20)
 
