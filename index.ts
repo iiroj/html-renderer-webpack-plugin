@@ -1,11 +1,14 @@
 import { Compiler, Stats, compilation } from "webpack";
-import { RawSource } from "webpack-sources";
+import { CachedSource, RawSource } from "webpack-sources";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
 export type RendererArgs = {
   assets?: {
     [key: string]: string[];
+  };
+  compilationAssets?: {
+    [key: string]: CachedSource;
   };
   filename?: string;
   path?: string;
@@ -45,6 +48,7 @@ export default class HtmlRendererWebpackPlugin {
       try {
         const html = await this.renderer({
           assets,
+          compilationAssets: compilation.assets,
           filename,
           path,
           publicPath,
