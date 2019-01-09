@@ -4,7 +4,8 @@
   <br/>
   <p>A webpack plugin for rendering static html pages</p>
   <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin"><strong>npm</strong></a> ·
-  <a href="https://github.com/iiroj/html-renderer-webpack-plugin"><strong>github</strong></a>
+  <a href="https://github.com/iiroj/html-renderer-webpack-plugin"><strong>GitHub</strong></a> ·
+  <a href="https://www.gitlab.com/iiroj/html-renderer-webpack-plugin"><strong>GitLab</strong></a>
   <br/>
   <br/>
   <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin">
