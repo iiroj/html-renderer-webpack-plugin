@@ -20,12 +20,10 @@
     "lint": "tslint -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json",
     "test": "jest",
+    "prebuild": "tsc --build --clean tsconfig.build.json",
     "build": "tsc --build --verbose tsconfig.build.json",
-    "clean": "tsc --build --clean tsconfig.build.json",
     "preversion": "npm run lint && npm run test && npm run build",
-    "version": "standard-version",
-    "push": "git push --follow-tags origin master",
-    "prepublishOnly": "npm run version && npm run push"
+    "version": "standard-version && git push --follow-tags origin master"
   },
   "peerDependencies": {
     "webpack": ">=4"
@@ -61,9 +59,5 @@
     "static",
     "template",
     "webpack"
-  ],
-  "jest": {
-    "testURL": "http://localhost/",
-    "verbose": true
-  }
+  ]
 }

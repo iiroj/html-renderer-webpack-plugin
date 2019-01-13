@@ -14,3 +14,12 @@ script:
   - npm run lint
   - npm run test
   - npm run build
+
+deploy:
+  provider: npm
+    on:
+      tags: true
+    skip_cleanup: true
+    email: $NPM_EMAIL
+    api_key: $NPM_TOKEN
+    script: netlify deploy -p -d public -f lambda -m "$TRAVIS_TAG"
