@@ -22,7 +22,7 @@
     "test": "jest",
     "build": "tsc --build --verbose tsconfig.build.json",
     "clean": "tsc --build --clean tsconfig.build.json",
-    "preversion": "npm run lint && npm run test && npm run build",
+    "preversion": "npm run lint && npm test && npm run build",
     "version": "standard-version",
     "push": "git push --follow-tags origin master",
     "prepublishOnly": "npm run version && npm run push"
