@@ -11,9 +11,6 @@
   <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin">
     <img src="https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg">
   </a>
-  <a href="https://travis-ci.com/iiroj/html-renderer-webpack-plugin">
-    <img src="https://travis-ci.com/iiroj/html-renderer-webpack-plugin.svg?branch=master" />
-  </a>
   <a href="https://github.com/iiroj/html-renderer-webpack-plugin">
     <img src="https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg">
   </a>
