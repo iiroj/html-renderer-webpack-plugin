@@ -1,28 +1,11 @@
-<div align="center">
-  <h1 align="center">HtmlRendererWebpackPlugin</h1>
-  <code>html-renderer-webpack-plugin</code>
-  <br/>
-  <p>A webpack plugin for rendering static html pages</p>
-  <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin"><strong>npm</strong></a> ·
-  <a href="https://github.com/iiroj/html-renderer-webpack-plugin"><strong>GitHub</strong></a> ·
-  <a href="https://www.gitlab.com/iiroj/html-renderer-webpack-plugin"><strong>GitLab</strong></a>
-  <br/>
-  <br/>
-  <a href="https://www.npmjs.com/package/html-renderer-webpack-plugin">
-    <img src="https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg">
-  </a>
-  <a href="https://github.com/iiroj/html-renderer-webpack-plugin">
-    <img src="https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg">
-  </a>
-  <a href="https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json">
-    <img src="https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg">
-  </a>
-  <a href="https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json">
-    <img src="https://img.shields.io/david/dev/iiroj/html-renderer-webpack-plugin.svg">
-  </a>
-  <br/>
-  <br/>
-</div>
+# HtmlRendererWebpackPlugin
+
+[![version](https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg)](https://www.npmjs.com/package/html-renderer-webpack-plugin)
+[![code size](https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin)
+[![dependencies](https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json)
+[![devDependencies](https://img.shields.io/david/dev/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json)
+
+A webpack plugin for rendering static html pages.
 
 ## Installation
 
