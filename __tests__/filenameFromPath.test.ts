@@ -1,4 +1,4 @@
-import { filenameFromPath } from "../index";
+import filenameFromPath from "../src/filenameFromPath";
 
 const paths = ["/", "/foo", "/bar/"];
 

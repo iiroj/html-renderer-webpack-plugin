@@ -1,4 +1,4 @@
-import { defaultRenderer } from "../index";
+import defaultRenderer from "../src/defaultRenderer";
 
 const assets = { js: ["5749aae7.js", "2ff13846.js"] };
 const publicPath = "/";

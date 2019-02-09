@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
     "declaration": true,
-    "jsx": "react",
     "lib": ["es7"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "noEmit": true,
-    "noResolve": false,
+    "noUnusedLocals": true,
     "noUnusedParameters": true,
     "pretty": true,
     "strict": true,
     "target": "es5"
   },
-  "exclude": [
-    "index.d.ts"
-  ]
+  "exclude": ["dist"]
 }

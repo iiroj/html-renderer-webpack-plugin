@@ -1,6 +1,8 @@
 const compiler = require("@webpack-contrib/test-utils");
 
-import HtmlRendererWebpackPlugin, { Options } from "../index";
+import HtmlRendererWebpackPlugin, {
+  Options
+} from "../src/HtmlRendererWebpackPlugin";
 
 const getWebpackConfig = (options: Options, config: Object = {}) =>
   Object.assign(

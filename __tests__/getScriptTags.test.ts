@@ -1,4 +1,4 @@
-import { getScriptTags } from "../index";
+import getScriptTags from "../src/getScriptTags";
 
 const js = ["5749aae7.js", "2ff13846.js"];
 
