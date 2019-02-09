@@ -49,17 +49,20 @@ The plugin is supplied an async renderer function that, for example, renders you
 The renderer function should be of type:
 
 ```javascript
-type Renderer = {
+type RendererArgs = {
   assets?: {
-    [key: string]: string[]
-  }
-  filename: string;
-  path: string;
-  publicPath: string;
-  stats: Options.Stats;
+    [key: string]: string[];
+  };
+  compilationAssets?: {
+    [key: string]: import("webpack-sources").CachedSource;
+  };
+  filename?: string;
+  path?: string;
+  publicPath?: string;
+  stats?: ReturnType<import("webpack").Stats["toJson"]>;
 };
 
-type renderer: (props: Renderer) => Promise<string>;
+type Renderer = (args: RendererArgs) => string | Promise<string>;
 ```
 
 where
@@ -86,7 +89,7 @@ The public path prefix as set in webpack's `config.options.publicPath`.
 
 #### stats
 
-The webpack's `stats` object. This is useful for [webpack-flush-chunk](https://github.com/faceyspacey/webpack-flush-chunks).
+The webpack's `stats.toJson()` object. This is useful for [webpack-flush-chunk](https://github.com/faceyspacey/webpack-flush-chunks).
 
 ## Babel
 

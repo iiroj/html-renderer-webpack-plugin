@@ -18,7 +18,7 @@ export declare type RendererArgs = {
   filename?: string;
   path?: string;
   publicPath?: string;
-  stats?: import("webpack").Stats;
+  stats?: ReturnType<import("webpack").Stats["toJson"]>;
 };
 
 export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
