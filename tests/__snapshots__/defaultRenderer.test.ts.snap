@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`defaultRenderer should generate html 1`] = `
-"<!doctype html><head><meta charset=\\"utf-8\\"><title>HtmlRendererWebpackPlugin</title><meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\"></head><div id=\\"root\\"></div><script defer type=\\"text/javascript\\" src=\\"/5749aae7.js\\"></script>
+"<!doctype html>
+<head>
+  <meta charset=\\"utf-8\\">
+  <title>HtmlRendererWebpackPlugin</title>
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+</head>
+<div id=\\"root\\"></div>
+<script defer type=\\"text/javascript\\" src=\\"/5749aae7.js\\"></script>
 <script defer type=\\"text/javascript\\" src=\\"/2ff13846.js\\"></script>"
 `;
