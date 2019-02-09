@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v3.1.12...v4.0.0) (2019-02-09)
+
+
+### Bug Fixes
+
+* `stats`’s type is basically `any` is since it’s the .toJson() return type ([7689197](https://github.com/iiroj/html-renderer-webpack-plugin/commit/7689197))
+
+
+### Code Refactoring
+
+* use watchRun hook to always invalidaterequire cache ([035b012](https://github.com/iiroj/html-renderer-webpack-plugin/commit/035b012))
+
+
+### Features
+
+* build using Rollup ([4f85148](https://github.com/iiroj/html-renderer-webpack-plugin/commit/4f85148))
+
+
+### BREAKING CHANGES
+
+* This replaces the “hotPath” option with “hot” boolean, by default true
+
+
+
 <a name="3.1.12"></a>
 ## [3.1.12](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v3.1.11...v3.1.12) (2019-02-05)
 
