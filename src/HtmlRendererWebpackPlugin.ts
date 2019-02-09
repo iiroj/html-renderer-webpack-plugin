@@ -1,10 +1,10 @@
 import { Compiler, compilation } from "webpack";
 import { RawSource } from "webpack-sources";
 
+import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
 import groupAssetsByExtensions from "./groupAssetsByExtensions";
-import defaultRenderer from "./defaultRenderer";
-import invalidateRequireCache from "./invalidateRequireCache";
+import purgeRequireCache from "./purgeRequireCache";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
@@ -23,26 +23,27 @@ export declare type RendererArgs = {
 
 export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
 
-export type Options = {
-  hotPath?: RegExp;
+export declare type Options = {
+  hot?: boolean;
   paths?: Array<string>;
   renderer?: Renderer;
 };
 
 export default class HtmlRendererWebpackPlugin {
-  hotPath?: RegExp;
-  paths: Array<string>;
-  renderer: Renderer;
+  private readonly hot: boolean;
+  private readonly paths: Array<string>;
+  private readonly renderer: Renderer;
 
-  constructor(options: Options = {}) {
-    this.hotPath = options.hotPath;
+  public constructor(options: Options = {}) {
+    this.hot = typeof options.hot !== "undefined" ? options.hot : true;
     this.paths = options.paths || ["/"];
     this.renderer = options.renderer || defaultRenderer;
-
-    this.plugin = this.plugin.bind(this);
   }
 
-  async plugin(compilation: compilation.Compilation, done: Function) {
+  private plugin = async (
+    compilation: compilation.Compilation,
+    done: Function
+  ) => {
     const stats = compilation.getStats().toJson();
     const { publicPath } = compilation.outputOptions || "";
     const assets = groupAssetsByExtensions(compilation.assets);
@@ -66,15 +67,13 @@ export default class HtmlRendererWebpackPlugin {
     }
 
     done();
-  }
+  };
 
-  apply(compiler: Compiler) {
-    if (this.hotPath) {
-      compiler.hooks.beforeCompile.tap(
-        PLUGIN_NAME,
-        invalidateRequireCache(this.hotPath)
-      );
+  public apply(compiler: Compiler) {
+    if (this.hot) {
+      compiler.hooks.watchRun.tapAsync(PLUGIN_NAME, purgeRequireCache);
     }
+
     compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);
   }
 }

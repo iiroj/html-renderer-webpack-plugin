@@ -66,7 +66,11 @@ where
 
 #### assets
 
-An object with all webpack's compiled assets, seperated by their file extensions into arrays.
+An object with all of webpack's compiled asset filenames, seperated by their file extensions into arrays.
+
+#### compilationAssets
+
+The raw contents of webpack's compilation.assets.
 
 #### filename
 
@@ -94,9 +98,7 @@ Because your renderer function typically imports your `<App />`, you probably ne
 
 * In your `renderer` function, require your main React component instead of importing:
   - `const App = require('src/components/App').default`
-* Add a `hotPath?: RegExp` option to `html-renderer-webpack-plugin` to watch for file changes in your preferred location:
-  - `hotPath: /\/src\//`
-* After compilation, `require.cache` will be invalidated and using `require` will result in updated code.
+* After watch mode recompilation, `require.cache` will be invalidated and using `require` will result in updated code.
 
 ### Longer Explanation
 
@@ -104,4 +106,6 @@ A typical feature of a dev environment includes some [hot module replacement](ht
 
 By default, when using `import` to require you application code, for example `import App from 'src/components/App`, the resulting module will be cached in the node process. Thus, after recompiling your html files after a webpack HMR update, the html file will still contain the old version, because it is cached in the `require.cache`.
 
-To overcome this limitation, you can supply a `hotPath?: RegExp` option to this plugin. After a webpack compilation, it will use this RegExp to invalidate any matching paths in the `require.cache` (`node_modules` will always be ignored). Then, if you use `const App = require('src/components/App').default` inside your renderer function, it will be freshly required the next time the HTML file is created. This will result in "hot-reloading" working properly for statically rendered content.
+To overcome this limitation, this plugin hooks into Webpack's `watchRun` hook, that runs in watch mode when files change. It will then invalidate every require used in changed files from the `require.cache`. Thus, if you use `const App = require('src/components/App').default` inside your renderer function, it will be freshly required the next time the HTML file is created. This will result in "hot-reloading" working properly for statically rendered content.
+
+You can disable this behaviour by supplying the `hot: false` option in the plugin constructor.
