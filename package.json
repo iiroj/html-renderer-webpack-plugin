@@ -10,7 +10,7 @@
   "main": "dist/HtmlRendererWebpackPlugin.js",
   "files": ["dist"],
   "engines": {
-    "node": ">= 8.11"
+    "node": ">=6.11.5"
   },
   "scripts": {
     "lint": "tslint -p tsconfig.json",
