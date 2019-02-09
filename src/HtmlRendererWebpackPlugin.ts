@@ -9,19 +9,21 @@ import purgeRequireCache from "./purgeRequireCache";
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
 export declare type RendererArgs = {
-  assets?: {
+  assets: {
     [key: string]: string[];
   };
-  compilationAssets?: {
+  compilationAssets: {
     [key: string]: import("webpack-sources").CachedSource;
   };
-  filename?: string;
-  path?: string;
-  publicPath?: string;
-  stats?: ReturnType<import("webpack").Stats["toJson"]>;
+  filename: string;
+  path: string;
+  publicPath: string;
+  stats: ReturnType<import("webpack").Stats["toJson"]>;
 };
 
-export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
+export declare type Renderer = (
+  args: Partial<RendererArgs>
+) => string | Promise<string>;
 
 export declare type Options = {
   hot?: boolean;

@@ -50,19 +50,21 @@ The renderer function should be of type:
 
 ```javascript
 type RendererArgs = {
-  assets?: {
+  assets: {
     [key: string]: string[];
   };
-  compilationAssets?: {
+  compilationAssets: {
     [key: string]: import("webpack-sources").CachedSource;
   };
-  filename?: string;
-  path?: string;
-  publicPath?: string;
-  stats?: ReturnType<import("webpack").Stats["toJson"]>;
+  filename: string;
+  path: string;
+  publicPath: string;
+  stats: ReturnType<import("webpack").Stats["toJson"]>;
 };
 
-type Renderer = (args: RendererArgs) => string | Promise<string>;
+export declare type Renderer = (
+  args: Partial<RendererArgs>
+) => string | Promise<string>;
 ```
 
 where

@@ -3,7 +3,9 @@ import getScriptTags from "./getScriptTags";
 export default async ({
   assets,
   publicPath
-}: import("./HtmlRendererWebpackPlugin").RendererArgs) => `<!doctype html>
+}: Partial<
+  import("./HtmlRendererWebpackPlugin").RendererArgs
+>) => `<!doctype html>
 <head>
   <meta charset="utf-8">
   <title>HtmlRendererWebpackPlugin</title>
