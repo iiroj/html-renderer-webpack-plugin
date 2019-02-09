@@ -8,15 +8,11 @@ export default {
     file: pkg.main,
     format: "cjs"
   },
-  external: [
-    ...Object.keys(pkg.dependencies),
-    "fs",
-    "path"
-  ],
+  external: [...Object.keys(pkg.dependencies), "fs", "path"],
   plugins: [
     typescript({
       typescript: require("typescript"),
-      tsconfig: './tsconfig.build.json'
+      tsconfig: "./tsconfig.build.json"
     })
   ]
 };
