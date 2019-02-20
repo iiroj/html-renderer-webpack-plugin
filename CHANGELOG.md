@@ -2,12 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [4.0.5](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.4...v4.0.5) (2019-02-20)
+## [4.0.6](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.5...v4.0.6) (2019-02-20)
 
 
 ### Bug Fixes
 
-* do not use import() for types ([6e654c0](https://github.com/iiroj/html-renderer-webpack-plugin/commit/6e654c0))
+* include webpack-sources' types as dependencies ([d160a83](https://github.com/iiroj/html-renderer-webpack-plugin/commit/d160a83))
 
 
 
