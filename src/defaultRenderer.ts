@@ -12,4 +12,4 @@ export default async ({
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div id="root"></div>
-${getScriptTags(publicPath, assets ? assets.js : [])}`;
+${getScriptTags(publicPath, (assets && "js" in assets && assets.js) || [])}`;

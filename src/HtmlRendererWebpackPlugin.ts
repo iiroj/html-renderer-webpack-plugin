@@ -10,7 +10,7 @@ const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
 export declare type RendererArgs = {
   assets: {
-    [key: string]: string[];
+    [key: string]: string[] | undefined;
   };
   compilationAssets: {
     [key: string]: import("webpack-sources").CachedSource;
@@ -25,11 +25,11 @@ export declare type Renderer = (
   args: Partial<RendererArgs>
 ) => string | Promise<string>;
 
-export declare type Options = {
-  hot?: boolean;
-  paths?: Array<string>;
-  renderer?: Renderer;
-};
+export declare type Options = Partial<{
+  hot: boolean;
+  paths: Array<string>;
+  renderer: Renderer;
+}>;
 
 export default class HtmlRendererWebpackPlugin {
   private readonly hot: boolean;
