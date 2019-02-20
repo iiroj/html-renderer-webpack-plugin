@@ -8,7 +8,7 @@ import purgeRequireCache from "./purgeRequireCache";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
-export declare type RendererArgs = {
+export declare type RendererArgs = Partial<{
   assets: {
     [key: string]: string[] | undefined;
   };
@@ -19,11 +19,9 @@ export declare type RendererArgs = {
   path: string;
   publicPath: string;
   stats: ReturnType<import("webpack").Stats["toJson"]>;
-};
+}>;
 
-export declare type Renderer = (
-  args: Partial<RendererArgs>
-) => string | Promise<string>;
+export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
 
 export declare type Options = Partial<{
   hot: boolean;
