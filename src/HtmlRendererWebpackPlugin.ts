@@ -1,5 +1,5 @@
 import { Compiler, compilation } from "webpack";
-import { RawSource } from "webpack-sources";
+import { CachedSource, RawSource } from "webpack-sources";
 
 import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
@@ -13,12 +13,12 @@ export declare type RendererArgs = Partial<{
     [key: string]: string[] | undefined;
   };
   compilationAssets: {
-    [key: string]: import("webpack-sources").CachedSource;
+    [key: string]: CachedSource;
   };
   filename: string;
   path: string;
   publicPath: string;
-  stats: ReturnType<import("webpack").Stats["toJson"]>;
+  stats: any;
 }>;
 
 export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
