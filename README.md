@@ -1,5 +1,6 @@
 # HtmlRendererWebpackPlugin
 
+[![CircleCI](https://circleci.com/gh/iiroj/html-renderer-webpack-plugin.svg?style=shield)](https://circleci.com/gh/iiroj/html-renderer-webpack-plugin)
 [![version](https://img.shields.io/npm/v/html-renderer-webpack-plugin.svg)](https://www.npmjs.com/package/html-renderer-webpack-plugin)
 [![code size](https://img.shields.io/github/languages/code-size/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin)
 [![dependencies](https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json)
