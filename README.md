@@ -8,6 +8,10 @@
 
 A webpack plugin for rendering static html pages.
 
+## 👉 [See Real Example Here](https://github.com/iiroj/iiro.fi/blob/master/src/renderer.js) 👈
+
+----
+
 ## Installation
 
 ```bash
