@@ -1,6 +1,6 @@
 {
   "name": "html-renderer-webpack-plugin",
-  "version": "4.0.9",
+  "version": "4.0.10",
   "description": "A webpack plugin for rendering static html pages",
   "author": "Iiro Jäppinen <iiro@jappinen.fi> (https://iiro.fi)",
   "license": "MIT",
