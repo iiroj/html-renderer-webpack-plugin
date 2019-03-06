@@ -8,6 +8,12 @@ import purgeRequireCache from "./purgeRequireCache";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
+export class HtmlRendererWebpackPluginError extends Error {
+  constructor(message: string) {
+    super(`HtmlRendererWebpackPlugin Error:\n\n${message}`);
+  }
+}
+
 export declare type RendererArgs = Partial<{
   assets: {
     [key: string]: string[] | undefined;
@@ -62,7 +68,11 @@ export default class HtmlRendererWebpackPlugin {
         });
         compilation.assets[filename] = new RawSource(html);
       } catch (error) {
-        compilation.errors.push(error);
+        compilation.errors.push(
+          new HtmlRendererWebpackPluginError(
+            error.stack || error.message || error
+          )
+        );
       }
     }
 
