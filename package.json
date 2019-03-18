@@ -21,7 +21,8 @@
     "watch": "rollup -cw",
     "build": "rollup -c",
     "preversion": "npm run lint && npm test && npm run build",
-    "version": "standard-version"
+    "version": "standard-version",
+    "push": "git push --follow-tags origin master"
   },
   "peerDependencies": {
     "webpack": ">=4"

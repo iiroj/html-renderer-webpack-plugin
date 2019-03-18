@@ -15,7 +15,9 @@ jobs:
           keys:
           - node_modules-{{ checksum "package.json" }}
           - node_modules-
-      - run: npm install
+      - run:
+          name: install
+          command: npm install
       - save_cache:
           paths:
             - node_modules
@@ -28,9 +30,15 @@ jobs:
       - restore_cache:
           keys:
           - node_modules-{{ checksum "package.json" }}
-      - run: npm run lint
-      - run: npm run typecheck
-      - run: npm run test
+      - run:
+          name: lint
+          command: npm run lint
+      - run:
+          name: typecheck
+          command: npm run typecheck
+      - run:
+          name: test
+          command: npm run test
 
   build:
     executor: worker
@@ -39,7 +47,9 @@ jobs:
       - restore_cache:
           keys:
           - node_modules-{{ checksum "package.json" }}
-      - run: npm run build
+      - run:
+          name: build
+          command: npm run build
       - persist_to_workspace:
           root: ~/ci
           paths: .
@@ -47,18 +57,13 @@ jobs:
   publish:
     executor: worker
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "56:d9:f4:6f:c5:58:f8:a1:29:a5:0e:18:f3:b6:59:56"
-      - run: ssh-keyscan -H github.com >> ~/.ssh/known_hosts
       - attach_workspace:
           at: ~/ci
-      - run: git config user.email "$GIT_AUTHOR_EMAIL"
-      - run: git config user.name "$GIT_AUTHOR_NAME"
-      - run: npm run version
-      - run: git push --follow-tags origin master
-      - run: npm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
-      - deploy: 
+      - run:
+          name: login
+          command: npm config set "//registry.npmjs.org/:_authToken" "$NPM_TOKEN"
+      - run:
+          name: publish
           command: npm publish
 
 workflows:
@@ -67,17 +72,27 @@ workflows:
     jobs:
       - install:
           filters:
-            branches:
-              ignore:
-                - /^chore\(release\).*/
+              tags:
+                only: /.*/
       - test:
           requires:
             - install
+          filters:
+            tags:
+              only: /.*/
       - build:
           requires:
             - install
+          filters:
+            tags:
+              only: /.*/
       - publish:
           requires:
             - test
             - build
           context: npm token
+          filters:
+            tags:
+              only: /^v[0-9].*/
+            branches:
+              ignore: /.*/
