@@ -5,6 +5,7 @@ import pkg from "./package.json";
 export default {
   input: "src/HtmlRendererWebpackPlugin.ts",
   output: {
+    exports: "named",
     file: pkg.main,
     format: "cjs"
   },
