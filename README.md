@@ -8,7 +8,7 @@
 
 A webpack plugin for rendering static html pages.
 
-## 👉 [See Real Example Here](https://github.com/iiroj/iiro.fi/blob/master/src/renderer.js) 👈
+## 👉 [See Real Example Here](https://github.com/iiroj/react-static-boilerplate/blob/master/src/renderer.js) 👈
 
 ----
 
