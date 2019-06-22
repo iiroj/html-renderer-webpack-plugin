@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.20](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.19...v4.0.20) (2019-06-22)
+
+
+
 ### [4.0.19](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.18...v4.0.19) (2019-06-02)
 
 
