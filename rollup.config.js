@@ -15,5 +15,8 @@ export default {
       typescript: require("typescript"),
       tsconfig: "./tsconfig.build.json"
     })
-  ]
+  ],
+  onwarn(warning) {
+    if (warning.code !== "THIS_IS_UNDEFINED") console.warn(warning.message);
+  }
 };
