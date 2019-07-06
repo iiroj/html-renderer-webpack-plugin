@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.21](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.20...v4.0.21) (2019-07-06)
+
+
+### Build System
+
+* suppress unneeded warning ([3d084f8](https://github.com/iiroj/html-renderer-webpack-plugin/commit/3d084f8))
+
+
+
 ### [4.0.20](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.19...v4.0.20) (2019-06-22)
 
 
