@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.22](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.21...v4.0.22) (2019-07-07)
+
+
+### Build System
+
+* add husky, commitlint and lint-staged ([c543390](https://github.com/iiroj/html-renderer-webpack-plugin/commit/c543390))
+
+
+
 ### [4.0.21](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.20...v4.0.21) (2019-07-06)
 
 
