@@ -9,7 +9,7 @@ import purgeRequireCache from "./purgeRequireCache";
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
 export class HtmlRendererWebpackPluginError extends Error {
-  constructor(message: string) {
+  public constructor(message: string) {
     super(`HtmlRendererWebpackPlugin Error:\n\n${message}`);
   }
 }
@@ -31,13 +31,13 @@ export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
 
 export declare type Options = Partial<{
   hot: boolean;
-  paths: Array<string>;
+  paths: string[];
   renderer: Renderer;
 }>;
 
 export default class HtmlRendererWebpackPlugin {
   private readonly hot: boolean;
-  private readonly paths: Array<string>;
+  private readonly paths: string[];
   private readonly renderer: Renderer;
 
   public constructor(options: Options = {}) {

@@ -1,10 +1,12 @@
-const compiler = require("@webpack-contrib/test-utils");
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 import HtmlRendererWebpackPlugin, {
   Options
 } from "../src/HtmlRendererWebpackPlugin";
 
-const getWebpackConfig = (options: Options, config: Object = {}) =>
+const compiler = require("@webpack-contrib/test-utils");
+
+const getWebpackConfig = (options: Options, config: Record<string, any> = {}) =>
   Object.assign(
     {
       entry: ["./index.js"],

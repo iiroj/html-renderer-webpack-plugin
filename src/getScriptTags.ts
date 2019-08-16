@@ -1,4 +1,4 @@
-export default (publichPath: string = "/", files: Array<string>) => {
+export default (publichPath: string = "/", files: string[]) => {
   const prefix = publichPath.endsWith("/") ? publichPath : publichPath + "/";
 
   return files

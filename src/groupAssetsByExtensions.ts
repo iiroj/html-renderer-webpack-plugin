@@ -1,7 +1,11 @@
 import { RawSource } from "webpack-sources";
 
-type ObjectOfRawsource = { [key: string]: RawSource };
-type ObjectOfArrays = { [key: string]: Array<string> };
+interface ObjectOfRawsource {
+  [key: string]: RawSource;
+}
+interface ObjectOfArrays {
+  [key: string]: string[];
+}
 
 export default (assets: ObjectOfRawsource) =>
   Object.keys(assets).reduce((accumulator: ObjectOfArrays, asset: string) => {
