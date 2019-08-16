@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.24...v5.0.0) (2019-08-16)
+
+
+### Features
+
+* add support for requiring renderer from string ([de2b6c7](https://github.com/iiroj/html-renderer-webpack-plugin/commit/de2b6c7))
+* use eslint instead of tslint ([7cc0c2d](https://github.com/iiroj/html-renderer-webpack-plugin/commit/7cc0c2d))
+* use native tsc and remove rollup ([5ff9a90](https://github.com/iiroj/html-renderer-webpack-plugin/commit/5ff9a90))
+
+
+### Tests
+
+* use plain webpack compiler in test ([77fafb4](https://github.com/iiroj/html-renderer-webpack-plugin/commit/77fafb4))
+
+
+### BREAKING CHANGES
+
+* This removes the `hot` option as unnecessary. Hot Reloading is now supported by dynamically importing the renderer function before each render, and adding a file watcher to trigger webpack rebuild during watch mode. See [MIGRATING.md](./MIGRATING.md) for migrating instructions.
+
+
+
 ### [4.0.24](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.23...v4.0.24) (2019-07-17)
 
 
