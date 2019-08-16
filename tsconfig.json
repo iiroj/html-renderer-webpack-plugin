@@ -2,8 +2,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "lib": ["esnext"],
-    "module": "commonjs",
+    "lib": ["es6"],
+    "module": "es6",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
