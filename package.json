@@ -16,10 +16,10 @@
   },
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json",
     "test": "jest",
-    "watch": "rollup -cw",
-    "build": "rollup -c",
+    "build": "tsc --build tsconfig.build.json",
+    "watch": "npm run build -- --watch",
     "version": "standard-version --no-verify"
   },
   "lint-staged": {
@@ -70,8 +70,6 @@
     "jest": "^24.8.0",
     "lint-staged": "^9.2.0",
     "prettier": "^1.18.2",
-    "rollup": "^1.17.0",
-    "rollup-plugin-typescript2": "^0.21.2",
     "standard-version": "^6.0.1",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
