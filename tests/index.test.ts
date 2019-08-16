@@ -3,24 +3,28 @@
 import HtmlRendererWebpackPlugin, {
   Options
 } from "../src/HtmlRendererWebpackPlugin";
-
-const compiler = require("@webpack-contrib/test-utils");
+import webpack from "webpack";
 
 const getWebpackConfig = (options: Options, config: Record<string, any> = {}) =>
   Object.assign(
     {
-      entry: ["./index.js"],
+      entry: ["./tests/__mocks__/index.js"],
       plugins: [new HtmlRendererWebpackPlugin(options)]
     },
     config
   );
+
+const compiler = (options: ReturnType<typeof getWebpackConfig>) =>
+  new Promise<webpack.Stats>(resolve => {
+    webpack(options, (_, stats) => resolve(stats));
+  });
 
 const renderer = () => "test";
 
 describe("HtmlRendererWebpackPlugin", () => {
   it("should render with default renderer", async () => {
     const paths = ["/", "/foo", "/bar/"];
-    const result = await compiler({}, getWebpackConfig({ paths }));
+    const result = await compiler(getWebpackConfig({ paths }));
     expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
     expect(result.compilation.assets["foo.html"]._value).toMatchSnapshot();
     expect(
@@ -31,7 +35,7 @@ describe("HtmlRendererWebpackPlugin", () => {
 
   it("should render with custom renderer", async () => {
     const paths = ["/"];
-    const result = await compiler({}, getWebpackConfig({ paths, renderer }));
+    const result = await compiler(getWebpackConfig({ paths, renderer }));
     expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
   });
 });
