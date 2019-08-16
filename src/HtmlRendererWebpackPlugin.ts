@@ -1,12 +1,19 @@
+import { FSWatcher } from "chokidar";
+import path from "path";
 import { Compiler, compilation } from "webpack";
 import { CachedSource, RawSource } from "webpack-sources";
 
 import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
 import groupAssetsByExtensions from "./groupAssetsByExtensions";
-import purgeRequireCache from "./purgeRequireCache";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
+
+const chokidarOptions = {
+  ignoreInitial: true,
+  disableGlobbing: true,
+  persistent: true
+};
 
 export class HtmlRendererWebpackPluginError extends Error {
   public constructor(message: string) {
@@ -32,19 +39,33 @@ export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
 export declare type Options = Partial<{
   hot: boolean;
   paths: string[];
-  renderer: Renderer;
+  renderer: Renderer | string;
 }>;
 
 export default class HtmlRendererWebpackPlugin {
-  private readonly hot: boolean;
   private readonly paths: string[];
   private readonly renderer: Renderer;
+  private src?: string;
 
-  public constructor(options: Options = {}) {
-    this.hot = typeof options.hot !== "undefined" ? options.hot : true;
-    this.paths = options.paths || ["/"];
-    this.renderer = options.renderer || defaultRenderer;
+  public constructor({
+    paths = ["/"],
+    renderer = defaultRenderer
+  }: Options = {}) {
+    this.paths = paths;
+    this.renderer =
+      typeof renderer === "function"
+        ? renderer
+        : this.createRequireAsyncRenderer(renderer);
   }
+
+  private createRequireAsyncRenderer = (src: string) => {
+    const resolved = path.resolve(process.cwd(), src);
+    this.src = resolved;
+    return async (args: RendererArgs) => {
+      const { default: renderer } = await import(resolved);
+      return renderer(args);
+    };
+  };
 
   private plugin = async (
     compilation: compilation.Compilation,
@@ -80,8 +101,22 @@ export default class HtmlRendererWebpackPlugin {
   };
 
   public apply(compiler: Compiler) {
-    if (this.hot) {
-      compiler.hooks.watchRun.tapAsync(PLUGIN_NAME, purgeRequireCache);
+    if (this.src) {
+      compiler.hooks.afterCompile.tap(PLUGIN_NAME, compilation => {
+        compilation.fileDependencies.add(this.src!);
+      });
+
+      let watcher: FSWatcher;
+
+      compiler.hooks.watchRun.tap(PLUGIN_NAME, async () => {
+        const chokidar = await import("chokidar");
+        watcher = chokidar.watch(this.src!, chokidarOptions);
+        watcher.on("change", () => {}); // trigger compilation
+      });
+
+      compiler.hooks.watchClose.tap(PLUGIN_NAME, () => {
+        if (watcher) watcher.close();
+      });
     }
 
     compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);

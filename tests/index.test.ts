@@ -38,4 +38,12 @@ describe("HtmlRendererWebpackPlugin", () => {
     const result = await compiler(getWebpackConfig({ paths, renderer }));
     expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
   });
+
+  it("should require renderer from string", async () => {
+    const paths = ["/"];
+    const result = await compiler(
+      getWebpackConfig({ paths, renderer: "./tests/__mocks__/renderer.js" })
+    );
+    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
+  });
 });

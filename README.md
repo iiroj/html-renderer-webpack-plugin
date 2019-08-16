@@ -26,7 +26,6 @@ yarn add --dev html-renderer-webpack-plugin
 
 ```javascript
 import HtmlRendererWebpackPlugin from 'html-renderer-webpack-plugin';
-import MySSRRenderer from './src/renderer';
 
 ...
 
@@ -39,7 +38,7 @@ config.plugins.push(new HtmlRendererWebpackPlugin({
     '/about', // --> about.html
     '/portfolio/' // --> portfolio/index.html
   ],
-  renderer: MySSRRenderer
+  renderer: './src/renderer.tsx'
 }));
 ```
 
@@ -103,6 +102,10 @@ The webpack's `stats.toJson()` object. This is useful for [webpack-flush-chunk](
 Because your renderer function typically imports your `<App />`, you probably need [babel](https://babeljs.io/). The easiest way is to run your webpack config through babel with `webpack --config webpack.config.babel.js`.
 
 ## Working with Hot Reloading
+
+Since version `v5.0.0` the `HTMLRendererWebpackPlugin` accepts the `renderer` option as a path to the renderer function (`string`), and will then dynamically import the function before each renderer. This makes the renderer result be always up-to-date with Hot Reloading.
+
+For older versions:
 
 ### TL;DR
 
