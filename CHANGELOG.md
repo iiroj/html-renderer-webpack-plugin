@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [5.0.2](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.0.1...v5.0.2) (2019-09-22)
+
+
+### Bug Fixes
+
+* add @types/node to fix duplicate identifier ([ec5b31f](https://github.com/iiroj/html-renderer-webpack-plugin/commit/ec5b31f))
+
 ### [5.0.1](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.0.0...v5.0.1) (2019-08-27)
 
 ## [5.0.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v4.0.24...v5.0.0) (2019-08-16)
