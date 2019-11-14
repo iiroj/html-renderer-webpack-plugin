@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.0.3...v5.1.0) (2019-11-14)
+
+
+### Features
+
+* add options object passed from plugin to renderer ([e800b42](https://github.com/iiroj/html-renderer-webpack-plugin/commit/e800b42))
+
 ### [5.0.3](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.0.2...v5.0.3) (2019-09-25)
 
 ### [5.0.2](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.0.1...v5.0.2) (2019-09-22)
