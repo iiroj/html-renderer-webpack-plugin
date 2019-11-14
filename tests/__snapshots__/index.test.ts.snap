@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HtmlRendererWebpackPlugin should pass options to renderer 1`] = `"{\\"foo\\":\\"bar\\"}"`;
+
 exports[`HtmlRendererWebpackPlugin should render with custom renderer 1`] = `"test"`;
 
 exports[`HtmlRendererWebpackPlugin should render with default renderer 1`] = `

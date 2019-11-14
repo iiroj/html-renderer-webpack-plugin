@@ -29,6 +29,7 @@ export declare type RendererArgs = Partial<{
     [key: string]: CachedSource;
   };
   filename: string;
+  options: Record<string, any>;
   path: string;
   publicPath: string;
   stats: any;
@@ -38,19 +39,23 @@ export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
 
 export declare type Options = Partial<{
   hot: boolean;
+  options: Record<string, any>;
   paths: string[];
   renderer: Renderer | string;
 }>;
 
 export default class HtmlRendererWebpackPlugin {
+  private readonly options?: Record<string, any>;
   private readonly paths: string[];
   private readonly renderer: Renderer;
   private src?: string;
 
   public constructor({
+    options,
     paths = ["/"],
     renderer = defaultRenderer
   }: Options = {}) {
+    this.options = options;
     this.paths = paths;
     this.renderer =
       typeof renderer === "function"
@@ -83,6 +88,7 @@ export default class HtmlRendererWebpackPlugin {
           assets,
           compilationAssets: compilation.assets,
           filename,
+          options: this.options,
           path,
           publicPath,
           stats

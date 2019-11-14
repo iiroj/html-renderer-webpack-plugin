@@ -33,6 +33,9 @@ config.output.publicPath = '/';
 
 ...
 config.plugins.push(new HtmlRendererWebpackPlugin({
+  options: {
+    isProduction: process.env.NODE_ENV === 'production'
+  },
   paths: [
     '/', // --> index.html
     '/about', // --> about.html
@@ -54,16 +57,17 @@ The renderer function should be of type:
 
 ```javascript
 type RendererArgs = {
-  assets: {
+  assets?: {
     [key: string]: string[];
   };
-  compilationAssets: {
+  compilationAssets?: {
     [key: string]: import("webpack-sources").CachedSource;
   };
-  filename: string;
-  path: string;
-  publicPath: string;
-  stats: ReturnType<import("webpack").Stats["toJson"]>;
+  filename?: string;
+  options?: Record<string, any>;
+  path?: string;
+  publicPath?: string;
+  stats?: ReturnType<import("webpack").Stats["toJson"]>;
 };
 
 export declare type Renderer = (
@@ -84,6 +88,10 @@ The raw contents of webpack's compilation.assets.
 #### filename
 
 A string of the current path's filename.
+
+#### options
+
+An object containing anything, passed from the webpack configuration to the renderer function. Useful for variables declared during build-time.
 
 #### path
 

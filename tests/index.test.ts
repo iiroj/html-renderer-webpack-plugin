@@ -46,4 +46,16 @@ describe("HtmlRendererWebpackPlugin", () => {
     );
     expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
   });
+
+  it("should pass options to renderer", async () => {
+    const paths = ["/"];
+    const result = await compiler(
+      getWebpackConfig({
+        options: { foo: "bar" },
+        paths,
+        renderer: "./tests/__mocks__/options-renderer.js"
+      })
+    );
+    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
+  });
 });
