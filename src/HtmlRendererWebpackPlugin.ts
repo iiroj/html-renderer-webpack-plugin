@@ -117,7 +117,7 @@ export default class HtmlRendererWebpackPlugin {
       compiler.hooks.watchRun.tap(PLUGIN_NAME, async () => {
         const chokidar = await import("chokidar");
         watcher = chokidar.watch(this.src!, chokidarOptions);
-        watcher.on("change", () => {}); // trigger compilation
+        watcher.on("change", () => null); // trigger compilation
       });
 
       compiler.hooks.watchClose.tap(PLUGIN_NAME, () => {
