@@ -15,7 +15,8 @@
     "node": ">=6.11.5"
   },
   "scripts": {
-    "lint": "eslint --ext .js,.ts .",
+    "lint:base": "eslint --ext .js,.ts",
+    "lint": "npm run lint:base -- .",
     "typecheck": "tsc -p tsconfig.json",
     "test": "jest",
     "prebuild": "rm -rf dist",
@@ -24,7 +25,7 @@
     "version": "standard-version --no-verify"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": "npm run lint"
+    "*.{js,ts}": "npm run lint:base --"
   },
   "commitlint": {
     "extends": [
