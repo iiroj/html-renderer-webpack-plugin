@@ -7,6 +7,7 @@ import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
 import groupAssetsByExtensions from "./groupAssetsByExtensions";
 import HtmlRendererWebpackPluginError from "./HtmlRendererWebpackPluginError";
+import purgeRequireCache from "./purgeRequireCache";
 import { Renderer, Options, RendererArgs } from "./types";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
@@ -81,14 +82,15 @@ export default class HtmlRendererWebpackPlugin {
 
   public apply(compiler: Compiler) {
     if (this.src) {
+      compiler.hooks.watchRun.tap(PLUGIN_NAME, purgeRequireCache);
+
       compiler.hooks.afterCompile.tap(PLUGIN_NAME, (compilation) => {
         compilation.fileDependencies.add(this.src!);
       });
 
       let watcher: FSWatcher;
-
+      const chokidar = require("chokidar");
       compiler.hooks.watchRun.tap(PLUGIN_NAME, () => {
-        const chokidar = require("chokidar");
         watcher = chokidar.watch(this.src!, chokidarOptions);
         watcher.on("change", () => null); // trigger compilation
       });
