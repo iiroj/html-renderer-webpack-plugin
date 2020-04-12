@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.1.3...v5.2.0) (2020-04-12)
+
+
+### Features
+
+* restore build with rollup, generate mjs module ([221f6e7](https://github.com/iiroj/html-renderer-webpack-plugin/commit/221f6e75cff0c6f2861171887eb2460b821a24ae))
+
+
+### Bug Fixes
+
+* restore require cache purge method ([7d82db8](https://github.com/iiroj/html-renderer-webpack-plugin/commit/7d82db86d5815187c08b868089ab80e1763813fc))
+
 ### [5.1.3](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.1.2...v5.1.3) (2020-03-14)
 
 ### [5.1.2](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.1.1...v5.1.2) (2019-12-30)
