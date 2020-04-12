@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 import HtmlRendererWebpackPlugin, {
-  Options
+  Options,
 } from "../src/HtmlRendererWebpackPlugin";
 import webpack from "webpack";
 
@@ -9,13 +9,13 @@ const getWebpackConfig = (options: Options, config: Record<string, any> = {}) =>
   Object.assign(
     {
       entry: ["./tests/__mocks__/index.js"],
-      plugins: [new HtmlRendererWebpackPlugin(options)]
+      plugins: [new HtmlRendererWebpackPlugin(options)],
     },
     config
   );
 
 const compiler = (options: ReturnType<typeof getWebpackConfig>) =>
-  new Promise<webpack.Stats>(resolve => {
+  new Promise<webpack.Stats>((resolve) => {
     webpack(options, (_, stats) => resolve(stats));
   });
 
@@ -53,7 +53,7 @@ describe("HtmlRendererWebpackPlugin", () => {
       getWebpackConfig({
         options: { foo: "bar" },
         paths,
-        renderer: "./tests/__mocks__/options-renderer.js"
+        renderer: "./tests/__mocks__/options-renderer.js",
       })
     );
     expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();

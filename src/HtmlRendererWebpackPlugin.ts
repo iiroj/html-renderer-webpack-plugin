@@ -12,7 +12,7 @@ const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 const chokidarOptions = {
   ignoreInitial: true,
   disableGlobbing: true,
-  persistent: true
+  persistent: true,
 };
 
 export class HtmlRendererWebpackPluginError extends Error {
@@ -53,7 +53,7 @@ export default class HtmlRendererWebpackPlugin {
   public constructor({
     options,
     paths = ["/"],
-    renderer = defaultRenderer
+    renderer = defaultRenderer,
   }: Options = {}) {
     this.options = options;
     this.paths = paths;
@@ -91,7 +91,7 @@ export default class HtmlRendererWebpackPlugin {
           options: this.options,
           path,
           publicPath,
-          stats
+          stats,
         });
         compilation.assets[filename] = new RawSource(html);
       } catch (error) {
@@ -108,7 +108,7 @@ export default class HtmlRendererWebpackPlugin {
 
   public apply(compiler: Compiler) {
     if (this.src) {
-      compiler.hooks.afterCompile.tap(PLUGIN_NAME, compilation => {
+      compiler.hooks.afterCompile.tap(PLUGIN_NAME, (compilation) => {
         compilation.fileDependencies.add(this.src!);
       });
 

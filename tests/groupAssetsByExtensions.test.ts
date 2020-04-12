@@ -9,7 +9,7 @@ const assets = {
   "1e77c6d6.css": new RawSource("test"),
   "7caf52ec.jpg": new RawSource("test"),
   "676c1b7d.png": new RawSource("test"),
-  "85a81ee1": new RawSource("test")
+  "85a81ee1": new RawSource("test"),
 };
 
 describe("groupAssetsByExtensions", () => {

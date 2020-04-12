@@ -2,7 +2,7 @@ import getScriptTags from "./getScriptTags";
 
 export default async ({
   assets,
-  publicPath
+  publicPath,
 }: Partial<
   import("./HtmlRendererWebpackPlugin").RendererArgs
 >) => `<!doctype html>
