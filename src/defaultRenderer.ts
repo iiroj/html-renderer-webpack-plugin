@@ -1,11 +1,10 @@
 import getScriptTags from "./getScriptTags";
+import { Renderer } from "./types";
 
-export default async ({
+const defaultRenderer: Renderer = async ({
   assets,
   publicPath,
-}: Partial<
-  import("./HtmlRendererWebpackPlugin").RendererArgs
->) => `<!doctype html>
+}) => `<!doctype html>
 <head>
   <meta charset="utf-8">
   <title>HtmlRendererWebpackPlugin</title>
@@ -13,3 +12,5 @@ export default async ({
 </head>
 <div id="root"></div>
 ${getScriptTags(publicPath, (assets && "js" in assets && assets.js) || [])}`;
+
+export default defaultRenderer;

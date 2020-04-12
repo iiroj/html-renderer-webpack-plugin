@@ -1,11 +1,13 @@
 import { FSWatcher } from "chokidar";
-import path from "path";
+import { resolve } from "path";
 import { Compiler, compilation } from "webpack";
-import { CachedSource, RawSource } from "webpack-sources";
+import { RawSource } from "webpack-sources";
 
 import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
 import groupAssetsByExtensions from "./groupAssetsByExtensions";
+import HtmlRendererWebpackPluginError from "./HtmlRendererWebpackPluginError";
+import { Renderer, Options, RendererArgs } from "./types";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
 
@@ -14,35 +16,6 @@ const chokidarOptions = {
   disableGlobbing: true,
   persistent: true,
 };
-
-export class HtmlRendererWebpackPluginError extends Error {
-  public constructor(message: string) {
-    super(`HtmlRendererWebpackPlugin Error:\n\n${message}`);
-  }
-}
-
-export declare type RendererArgs = Partial<{
-  assets: {
-    [key: string]: string[] | undefined;
-  };
-  compilationAssets: {
-    [key: string]: CachedSource;
-  };
-  filename: string;
-  options: Record<string, any>;
-  path: string;
-  publicPath: string;
-  stats: any;
-}>;
-
-export declare type Renderer = (args: RendererArgs) => string | Promise<string>;
-
-export declare type Options = Partial<{
-  hot: boolean;
-  options: Record<string, any>;
-  paths: string[];
-  renderer: Renderer | string;
-}>;
 
 export default class HtmlRendererWebpackPlugin {
   private readonly options?: Record<string, any>;
@@ -64,10 +37,10 @@ export default class HtmlRendererWebpackPlugin {
   }
 
   private createRequireAsyncRenderer = (src: string) => {
-    const resolved = path.resolve(process.cwd(), src);
+    const resolved = resolve(process.cwd(), src);
     this.src = resolved;
-    return async (args: RendererArgs) => {
-      const { default: renderer } = await import(resolved);
+    return (args: RendererArgs) => {
+      const renderer = require(resolved);
       return renderer(args);
     };
   };
@@ -114,8 +87,8 @@ export default class HtmlRendererWebpackPlugin {
 
       let watcher: FSWatcher;
 
-      compiler.hooks.watchRun.tap(PLUGIN_NAME, async () => {
-        const chokidar = await import("chokidar");
+      compiler.hooks.watchRun.tap(PLUGIN_NAME, () => {
+        const chokidar = require("chokidar");
         watcher = chokidar.watch(this.src!, chokidarOptions);
         watcher.on("change", () => null); // trigger compilation
       });

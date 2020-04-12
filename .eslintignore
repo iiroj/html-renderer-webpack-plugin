@@ -1,3 +1,6 @@
-.rpt2_cache
-dist
+coverage
 node_moduels
+
+/index.js
+/index.mjs
+/*.d.ts

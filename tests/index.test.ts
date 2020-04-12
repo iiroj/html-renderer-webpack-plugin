@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-import HtmlRendererWebpackPlugin, {
-  Options,
-} from "../src/HtmlRendererWebpackPlugin";
+import HtmlRendererWebpackPlugin from "../src/HtmlRendererWebpackPlugin";
+import { Options } from "../src/types";
 import webpack from "webpack";
 
 const getWebpackConfig = (options: Options, config: Record<string, any> = {}) =>
