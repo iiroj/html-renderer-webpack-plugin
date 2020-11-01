@@ -1,4 +1,4 @@
-export default (publichPath = "/", files: string[]) => {
+const getScriptTags = (files: string[], publichPath = "/"): string => {
   const prefix = publichPath.endsWith("/") ? publichPath : publichPath + "/";
 
   return files
@@ -8,3 +8,5 @@ export default (publichPath = "/", files: string[]) => {
     )
     .join("\n");
 };
+
+export default getScriptTags;

@@ -11,6 +11,6 @@ const defaultRenderer: Renderer = async ({
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <div id="root"></div>
-${getScriptTags(publicPath, (assets && "js" in assets && assets.js) || [])}`;
+${getScriptTags((assets && "js" in assets && assets.js) || [], publicPath)}`;
 
 export default defaultRenderer;
