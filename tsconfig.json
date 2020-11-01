@@ -8,8 +8,8 @@
     "pretty": true,
     "resolveJsonModule": true,
     "rootDir": "src",
+    "skipLibCheck": true,
     "strict": true,
-    "skipLibCheck": false,
     "target": "es2017"
   },
   "include": ["src"],
