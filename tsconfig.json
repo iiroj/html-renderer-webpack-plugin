@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "rootDir": "src",
     "strict": true,
+    "skipLibCheck": false,
     "target": "es2017"
   },
   "include": ["src"],
