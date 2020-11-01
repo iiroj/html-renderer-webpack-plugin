@@ -40,8 +40,8 @@ class HtmlRendererWebpackPlugin {
   private createRequireAsyncRenderer = (src: string) => {
     const resolved = resolve(process.cwd(), src);
     this.src = resolved;
-    return (args: RendererArgs) => {
-      const renderer = require(resolved);
+    return async (args: RendererArgs) => {
+      const { default: renderer } = await import(resolved);
       return renderer(args);
     };
   };
