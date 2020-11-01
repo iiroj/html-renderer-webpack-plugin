@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.3.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.2.0...v5.3.0) (2020-11-01)
+
+
+### Features
+
+* use dynamic import to load renderer function to support esm modules ([a05f437](https://github.com/iiroj/html-renderer-webpack-plugin/commit/a05f43775cf922b1b234c41206a1cbfa538574c8))
+
 ## [5.2.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.1.3...v5.2.0) (2020-04-12)
 
 
