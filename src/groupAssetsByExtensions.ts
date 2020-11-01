@@ -1,13 +1,14 @@
 import { RawSource } from "webpack-sources";
 
-interface ObjectOfRawsource {
+type ObjectOfRawsource = {
   [key: string]: RawSource;
-}
-interface ObjectOfArrays {
-  [key: string]: string[];
-}
+};
 
-export default (assets: ObjectOfRawsource) =>
+type ObjectOfArrays = {
+  [key: string]: string[];
+};
+
+const groupAssetsByExtensions = (assets: ObjectOfRawsource): ObjectOfArrays =>
   Object.keys(assets).reduce((accumulator: ObjectOfArrays, asset: string) => {
     const ext = asset.slice(((asset.lastIndexOf(".") - 1) >>> 0) + 2);
 
@@ -19,3 +20,5 @@ export default (assets: ObjectOfRawsource) =>
 
     return accumulator;
   }, {});
+
+export default groupAssetsByExtensions;

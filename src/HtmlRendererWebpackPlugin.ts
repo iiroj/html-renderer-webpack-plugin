@@ -18,7 +18,7 @@ const chokidarOptions = {
   persistent: true,
 };
 
-export default class HtmlRendererWebpackPlugin {
+class HtmlRendererWebpackPlugin {
   private readonly options?: Record<string, any>;
   private readonly paths: string[];
   private readonly renderer: Renderer;
@@ -48,8 +48,8 @@ export default class HtmlRendererWebpackPlugin {
 
   private plugin = async (
     compilation: compilation.Compilation,
-    done: Function
-  ) => {
+    done: () => void
+  ): Promise<void> => {
     const stats = compilation.getStats().toJson();
     const { publicPath } = compilation.outputOptions || "";
     const assets = groupAssetsByExtensions(compilation.assets);
@@ -80,7 +80,7 @@ export default class HtmlRendererWebpackPlugin {
     done();
   };
 
-  public apply(compiler: Compiler) {
+  public apply(compiler: Compiler): void {
     if (this.src) {
       compiler.hooks.watchRun.tap(PLUGIN_NAME, purgeRequireCache);
 
@@ -103,3 +103,5 @@ export default class HtmlRendererWebpackPlugin {
     compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);
   }
 }
+
+export default HtmlRendererWebpackPlugin;
