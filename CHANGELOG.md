@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.0.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.3.0...v6.0.0) (2021-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* This probably no longer works on webpack < 5
+
+### Features
+
+* update to webpack 5 ([8c33c31](https://github.com/iiroj/html-renderer-webpack-plugin/commit/8c33c31e3c841c6f62fd6d15de1bec3ab6bab1b0))
+
 ## [5.3.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.2.0...v5.3.0) (2020-11-01)
 
 
