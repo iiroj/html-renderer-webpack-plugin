@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true,
+    "rootDir": "../",
   },
   "include": ["**/*"],
   "exclude": ["coverage", "node_modules", "src"]
