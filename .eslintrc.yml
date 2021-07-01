@@ -17,8 +17,6 @@ extends:
   - plugin:@typescript-eslint/recommended
   - plugin:prettier/recommended
   - prettier
-  - prettier/standard
-  - prettier/@typescript-eslint
 
 rules:
   "@typescript-eslint/explicit-function-return-type": off

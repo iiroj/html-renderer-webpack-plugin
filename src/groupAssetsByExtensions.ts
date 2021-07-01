@@ -1,14 +1,12 @@
-import { RawSource } from "webpack-sources";
-
-type ObjectOfRawsource = {
-  [key: string]: RawSource;
-};
+import type { Compilation } from "webpack";
 
 type ObjectOfArrays = {
   [key: string]: string[];
 };
 
-const groupAssetsByExtensions = (assets: ObjectOfRawsource): ObjectOfArrays =>
+const groupAssetsByExtensions = (
+  assets: Compilation["assets"]
+): ObjectOfArrays =>
   Object.keys(assets).reduce((accumulator: ObjectOfArrays, asset: string) => {
     const ext = asset.slice(((asset.lastIndexOf(".") - 1) >>> 0) + 2);
 

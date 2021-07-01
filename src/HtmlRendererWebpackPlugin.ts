@@ -1,27 +1,18 @@
-import { FSWatcher } from "chokidar";
 import { resolve } from "path";
-import { Compiler, compilation } from "webpack";
-import { RawSource } from "webpack-sources";
+import { Compilation, sources, Compiler } from "webpack";
 
 import defaultRenderer from "./defaultRenderer";
 import filenameFromPath from "./filenameFromPath";
 import groupAssetsByExtensions from "./groupAssetsByExtensions";
 import HtmlRendererWebpackPluginError from "./HtmlRendererWebpackPluginError";
-import purgeRequireCache from "./purgeRequireCache";
-import { Renderer, Options, RendererArgs } from "./types";
+import { Renderer, Options } from "./types";
 
 const PLUGIN_NAME = "HtmlRendererWebpackPlugin";
-
-const chokidarOptions = {
-  ignoreInitial: true,
-  disableGlobbing: true,
-  persistent: true,
-};
 
 class HtmlRendererWebpackPlugin {
   private readonly options?: Record<string, any>;
   private readonly paths: string[];
-  private readonly renderer: Renderer;
+  private readonly renderer: string | Renderer;
   private src?: string;
 
   public constructor({
@@ -31,34 +22,60 @@ class HtmlRendererWebpackPlugin {
   }: Options = {}) {
     this.options = options;
     this.paths = paths;
-    this.renderer =
-      typeof renderer === "function"
-        ? renderer
-        : this.createRequireAsyncRenderer(renderer);
+    this.renderer = renderer;
+
+    if (typeof renderer === "string") {
+      const resolved = resolve(process.cwd(), renderer);
+      this.src = resolved;
+    }
   }
 
-  private createRequireAsyncRenderer = (src: string) => {
-    const resolved = resolve(process.cwd(), src);
-    this.src = resolved;
-    return async (args: RendererArgs) => {
-      const { default: renderer } = await import(resolved);
-      return renderer(args);
-    };
+  private requireRenderer = () => {
+    if (!this.src) return;
+
+    delete require.cache[this.src];
+
+    const required = require(this.src);
+
+    if (typeof required === "function") {
+      return required;
+    }
+
+    if (typeof required === "object" && "default" in required) {
+      return required.default;
+    }
   };
 
-  private plugin = async (
-    compilation: compilation.Compilation,
-    done: () => void
-  ): Promise<void> => {
+  private watchRun = (compiler: Compiler): void => {
+    if (!this.src) return;
+
+    compiler.modifiedFiles?.forEach((file) => {
+      delete require.cache[file];
+    });
+
+    compiler.hooks.afterCompile.tap({ name: PLUGIN_NAME }, (compilation) => {
+      compilation.fileDependencies.add(this.src!);
+    });
+  };
+
+  private processAssets = async (compilation: Compilation): Promise<void> => {
     const stats = compilation.getStats().toJson();
-    const { publicPath } = compilation.outputOptions || "";
+    const publicPath =
+      typeof compilation.outputOptions.publicPath === "string"
+        ? compilation.outputOptions.publicPath
+        : "";
     const assets = groupAssetsByExtensions(compilation.assets);
+
+    const renderer =
+      typeof this.renderer === "function"
+        ? this.renderer
+        : this.requireRenderer();
 
     for (const path of this.paths) {
       const filename = filenameFromPath(path);
 
       try {
-        const html = await this.renderer({
+        const html = await renderer({
           assets,
           compilationAssets: compilation.assets,
           filename,
@@ -67,7 +84,8 @@ class HtmlRendererWebpackPlugin {
           publicPath,
           stats,
         });
-        compilation.assets[filename] = new RawSource(html);
+
+        compilation.emitAsset(filename, new sources.RawSource(html, false));
       } catch (error) {
         compilation.errors.push(
           new HtmlRendererWebpackPluginError(
@@ -76,31 +94,20 @@ class HtmlRendererWebpackPlugin {
         );
       }
     }
-
-    done();
   };
 
   public apply(compiler: Compiler): void {
-    if (this.src) {
-      compiler.hooks.watchRun.tap(PLUGIN_NAME, purgeRequireCache);
+    compiler.hooks.watchRun.tap({ name: PLUGIN_NAME }, this.watchRun);
 
-      compiler.hooks.afterCompile.tap(PLUGIN_NAME, (compilation) => {
-        compilation.fileDependencies.add(this.src!);
-      });
-
-      let watcher: FSWatcher;
-      const chokidar = require("chokidar");
-      compiler.hooks.watchRun.tap(PLUGIN_NAME, () => {
-        watcher = chokidar.watch(this.src!, chokidarOptions);
-        watcher.on("change", () => null); // trigger compilation
-      });
-
-      compiler.hooks.watchClose.tap(PLUGIN_NAME, () => {
-        if (watcher) watcher.close();
-      });
-    }
-
-    compiler.hooks.emit.tapAsync(PLUGIN_NAME, this.plugin);
+    compiler.hooks.thisCompilation.tap({ name: PLUGIN_NAME }, (compilation) => {
+      compilation.hooks.processAssets.tapPromise(
+        {
+          name: PLUGIN_NAME,
+          stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE_INLINE,
+        },
+        () => this.processAssets(compilation)
+      );
+    });
   }
 }
 

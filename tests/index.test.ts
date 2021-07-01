@@ -3,58 +3,82 @@
 import HtmlRendererWebpackPlugin from "../src/HtmlRendererWebpackPlugin";
 import { Options } from "../src/types";
 import webpack from "webpack";
+import MemoryFileSystem from "memory-fs";
 
 const getWebpackConfig = (options: Options, config: Record<string, any> = {}) =>
   Object.assign(
     {
       entry: ["./tests/__mocks__/index.js"],
+      mode: "development" as const,
       plugins: [new HtmlRendererWebpackPlugin(options)],
     },
     config
   );
 
-const compiler = (options: ReturnType<typeof getWebpackConfig>) =>
-  new Promise<webpack.Stats>((resolve) => {
-    webpack(options, (_, stats) => resolve(stats));
-  });
-
 const renderer = () => "test";
 
 describe("HtmlRendererWebpackPlugin", () => {
+  let fs: MemoryFileSystem;
+
+  beforeEach(() => {
+    fs = new MemoryFileSystem();
+  });
+
+  const compile = (options: ReturnType<typeof getWebpackConfig>) =>
+    new Promise<webpack.Stats["compilation"]>((resolve, reject) => {
+      const compiler = webpack(options);
+
+      compiler.inputFileSystem = fs;
+      compiler.outputFileSystem = fs;
+
+      compiler.run((error, stats) => {
+        if (error) reject(error);
+        resolve(stats!.compilation);
+      });
+    });
+
+  const readFile = (name: string) =>
+    fs.readFileSync(`${process.cwd()}/dist/${name}`).toString();
+
   it("should render with default renderer", async () => {
     const paths = ["/", "/foo", "/bar/"];
-    const result = await compiler(getWebpackConfig({ paths }));
-    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
-    expect(result.compilation.assets["foo.html"]._value).toMatchSnapshot();
-    expect(
-      result.compilation.assets["bar/index.html"]._value
-    ).toMatchSnapshot();
-    expect(result.compilation.assets["bar.html"]).toBeUndefined();
+
+    await compile(getWebpackConfig({ paths }));
+
+    expect(readFile("index.html")).toMatchSnapshot();
+    expect(readFile("foo.html")).toMatchSnapshot();
+    expect(readFile("bar/index.html")).toMatchSnapshot();
+
+    expect(() => readFile("bar.html")).toThrowError("ENOENT");
   });
 
   it("should render with custom renderer", async () => {
     const paths = ["/"];
-    const result = await compiler(getWebpackConfig({ paths, renderer }));
-    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
+    await compile(getWebpackConfig({ paths, renderer }));
+    expect(readFile("index.html")).toMatchSnapshot();
   });
 
   it("should require renderer from string", async () => {
     const paths = ["/"];
-    const result = await compiler(
+
+    await compile(
       getWebpackConfig({ paths, renderer: "./tests/__mocks__/renderer.js" })
     );
-    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
+
+    expect(readFile("index.html")).toMatchSnapshot();
   });
 
   it("should pass options to renderer", async () => {
     const paths = ["/"];
-    const result = await compiler(
+
+    await compile(
       getWebpackConfig({
         options: { foo: "bar" },
         paths,
         renderer: "./tests/__mocks__/options-renderer.js",
       })
     );
-    expect(result.compilation.assets["index.html"]._value).toMatchSnapshot();
+
+    expect(readFile("index.html")).toMatchSnapshot();
   });
 });

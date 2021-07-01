@@ -12,7 +12,7 @@ exports[`HtmlRendererWebpackPlugin should render with default renderer 1`] = `
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
 </head>
 <div id=\\"root\\"></div>
-<script defer type=\\"text/javascript\\" src=\\"/main.js\\"></script>"
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
 `;
 
 exports[`HtmlRendererWebpackPlugin should render with default renderer 2`] = `
@@ -23,7 +23,7 @@ exports[`HtmlRendererWebpackPlugin should render with default renderer 2`] = `
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
 </head>
 <div id=\\"root\\"></div>
-<script defer type=\\"text/javascript\\" src=\\"/main.js\\"></script>"
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
 `;
 
 exports[`HtmlRendererWebpackPlugin should render with default renderer 3`] = `
@@ -34,7 +34,7 @@ exports[`HtmlRendererWebpackPlugin should render with default renderer 3`] = `
   <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
 </head>
 <div id=\\"root\\"></div>
-<script defer type=\\"text/javascript\\" src=\\"/main.js\\"></script>"
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
 `;
 
 exports[`HtmlRendererWebpackPlugin should require renderer from string 1`] = `"test"`;

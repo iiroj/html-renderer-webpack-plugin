@@ -2,9 +2,7 @@ export type RendererArgs = Partial<{
   assets: {
     [key: string]: string[] | undefined;
   };
-  compilationAssets: {
-    [key: string]: import("webpack-sources").CachedSource;
-  };
+  compilationAssets: import("webpack").Compilation["assets"];
   filename: string;
   options: Record<string, any>;
   path: string;

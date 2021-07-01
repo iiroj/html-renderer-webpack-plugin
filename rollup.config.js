@@ -4,11 +4,7 @@ import pkg from "./package.json";
 
 const input = "./src/index.ts";
 
-const external = [
-  "path",
-  ...Object.keys(pkg.dependencies),
-  ...Object.keys(pkg.peerDependencies),
-];
+const external = ["path", ...Object.keys(pkg.peerDependencies)];
 
 export default [
   {
