@@ -13,7 +13,6 @@ export type RendererArgs = Partial<{
 export type Renderer = (args: RendererArgs) => string | Promise<string>;
 
 export type Options = Partial<{
-  hot: boolean;
   options: Record<string, any>;
   paths: string[];
   renderer: Renderer | string;
