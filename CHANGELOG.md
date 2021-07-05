@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.1.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v6.0.0...v6.1.0) (2021-07-05)
+
+
+### Features
+
+* allow the paths options to be an async function ([f319e1b](https://github.com/iiroj/html-renderer-webpack-plugin/commit/f319e1b2c020ede49e1bf97cf91905e342659e6c))
+
 ## [6.0.0](https://github.com/iiroj/html-renderer-webpack-plugin/compare/v5.3.0...v6.0.0) (2021-07-01)
 
 
