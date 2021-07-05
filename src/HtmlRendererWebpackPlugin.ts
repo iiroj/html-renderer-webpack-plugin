@@ -71,7 +71,12 @@ class HtmlRendererWebpackPlugin {
         ? this.renderer
         : this.requireRenderer();
 
-    for (const path of this.paths) {
+    /** `this.paths` might be an async function returning path strings */
+    const paths =
+      typeof this.paths === "function" ? await this.paths() : this.paths;
+
+    /** Run renderer for each path */
+    for (const path of paths) {
       const filename = filenameFromPath(path);
 
       try {

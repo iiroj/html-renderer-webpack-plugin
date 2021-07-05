@@ -52,6 +52,16 @@ describe("HtmlRendererWebpackPlugin", () => {
     expect(() => readFile("bar.html")).toThrowError("ENOENT");
   });
 
+  it("should get paths from async function", async () => {
+    const paths = async () => ["/", "/foo", "/bar/"];
+
+    await compile(getWebpackConfig({ paths }));
+
+    expect(readFile("index.html")).toMatchSnapshot();
+    expect(readFile("foo.html")).toMatchSnapshot();
+    expect(readFile("bar/index.html")).toMatchSnapshot();
+  });
+
   it("should render with custom renderer", async () => {
     const paths = ["/"];
     await compile(getWebpackConfig({ paths, renderer }));

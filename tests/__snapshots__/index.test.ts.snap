@@ -1,5 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`HtmlRendererWebpackPlugin should get paths from async function 1`] = `
+"<!doctype html>
+<head>
+  <meta charset=\\"utf-8\\">
+  <title>HtmlRendererWebpackPlugin</title>
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+</head>
+<div id=\\"root\\"></div>
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
+`;
+
+exports[`HtmlRendererWebpackPlugin should get paths from async function 2`] = `
+"<!doctype html>
+<head>
+  <meta charset=\\"utf-8\\">
+  <title>HtmlRendererWebpackPlugin</title>
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+</head>
+<div id=\\"root\\"></div>
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
+`;
+
+exports[`HtmlRendererWebpackPlugin should get paths from async function 3`] = `
+"<!doctype html>
+<head>
+  <meta charset=\\"utf-8\\">
+  <title>HtmlRendererWebpackPlugin</title>
+  <meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1\\">
+</head>
+<div id=\\"root\\"></div>
+<script defer type=\\"text/javascript\\" src=\\"auto/main.js\\"></script>"
+`;
+
 exports[`HtmlRendererWebpackPlugin should pass options to renderer 1`] = `"{\\"foo\\":\\"bar\\"}"`;
 
 exports[`HtmlRendererWebpackPlugin should render with custom renderer 1`] = `"test"`;

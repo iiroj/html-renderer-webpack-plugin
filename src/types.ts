@@ -14,6 +14,6 @@ export type Renderer = (args: RendererArgs) => string | Promise<string>;
 
 export type Options = Partial<{
   options: any;
-  paths: string[];
+  paths: string[] | (() => Promise<string[]>);
   renderer: Renderer | string;
 }>;
