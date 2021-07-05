@@ -8,7 +8,7 @@
 
 A webpack plugin for emitting html files from a list of paths.
 
-## 👉 [See Real Example Here](https://github.com/iiroj/iiro.fi/blob/master/src/server.tsx) 👈
+## 👉 [See Real Example Here](https://github.com/iiroj/iiro.fi/blob/398c26e754e56d9541eb8b8f65219f05dc517ccf/server/renderer.tsx) 👈
 
 ----
 
