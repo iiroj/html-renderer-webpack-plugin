@@ -6,9 +6,9 @@
 [![dependencies](https://img.shields.io/david/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json)
 [![devDependencies](https://img.shields.io/david/dev/iiroj/html-renderer-webpack-plugin.svg)](https://github.com/iiroj/html-renderer-webpack-plugin/blob/master/package.json)
 
-A webpack plugin for rendering static html pages.
+A webpack plugin for emitting html files from a list of paths.
 
-## 👉 [See Real Example Here](https://github.com/iiroj/react-static-boilerplate/blob/master/src/renderer.js) 👈
+## 👉 [See Real Example Here](https://github.com/iiroj/iiro.fi/blob/master/src/server.tsx) 👈
 
 ----
 
@@ -22,7 +22,17 @@ npm install --save-dev html-renderer-webpack-plugin
 yarn add --dev html-renderer-webpack-plugin
 ```
 
+
 ## Usage
+
+This plugin provides a server-like environment for rendering static (React) html pages. It is useful for serverless environments as a static site generator.
+
+Pages are rendered from the supplied `paths: string[] | () => Promise<string[]>` argument, that should include your supported (static) routes. It might be useful to import these from your router configuration. The `paths` options can either be a list of strings, or an async function. The latter is useful for dynamically generating paths during built-time, for example from a directory structure.
+
+The plugin is supplied an async renderer function that, for example, renders your pages using `react-dom`'s `renderToString` and returns a complete HTML string. The default renderer function simply returns a page with Webpack's generated bundles and an empty `<div id="root>` tag.
+
+
+### Webpack plugin
 
 ```javascript
 import HtmlRendererWebpackPlugin from 'html-renderer-webpack-plugin';
@@ -45,88 +55,43 @@ config.plugins.push(new HtmlRendererWebpackPlugin({
 }));
 ```
 
-This plugin provides a server-like environment for rendering static (React) html pages. It is useful for serverless environments as a static site generator.
+| Option | type | description |
+| :----- | :--- | :---------- |
+| `options` | `any` | Pass any values from the webpack config to the  `renderer` function |
+| `paths` | `string[] \| () => Promise<string[]>`| The paths to be renderer, like `"/"` and `"/about"` |
+| `renderer` | `string \| Renderer` | A file path to the renderer function, or an inline function. See below for more options. |
 
-Pages are rendered from a supplied `paths: string[]` array that should include your supported (static) routes. It might be useful to import these from your router configuration.
-
-The plugin is supplied an async renderer function that, for example, renders your pages using `react-dom`'s `renderToString` and returns a complete HTML string. The default renderer function simply returns a page with javascript bundles and an empty `<div id="root>` tag.
 
 ### Renderer
 
-The renderer function should be of type:
-
 ```javascript
-type RendererArgs = {
-  assets?: {
-    [key: string]: string[];
-  };
-  compilationAssets?: {
-    [key: string]: import("webpack-sources").CachedSource;
-  };
-  filename?: string;
-  options?: Record<string, any>;
-  path?: string;
-  publicPath?: string;
-  stats?: ReturnType<import("webpack").Stats["toJson"]>;
-};
+export default async ({ path }) => `<html>
+  <head>
+    <title>Page for ${path}</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+  </body>
+</html>`
 
-export declare type Renderer = (
-  args: Partial<RendererArgs>
-) => string | Promise<string>;
 ```
 
-where
+| Option | type | description |
+| :----- | :--- | :---------- |
+| `assets` | `Record<string, string[] | undefined>` | List of emitted asset filenames grouped by extensions |
+| `compilationAssets` | `import("webpack").Compilation["assets"]` | the current compilation's assets |
+| `filename` | `string` | The filename for the current html file, like `"index.html"` or `"about.html"`
+| `options` | `any` | Any value passed from the webpack config |
+| `path` | `string`| The current path, like `"/"` or `"/about"` |
+| `publicPath` | `string` | The webpack public path prefix, like `""` or `"/public"` |
+| `stats` | `any` | The current compilation's JSON stats |
 
-#### assets
-
-An object with all of webpack's compiled asset filenames, seperated by their file extensions into arrays.
-
-#### compilationAssets
-
-The raw contents of webpack's compilation.assets.
-
-#### filename
-
-A string of the current path's filename.
-
-#### options
-
-An object containing anything, passed from the webpack configuration to the renderer function. Useful for variables declared during build-time.
-
-#### path
-
-A string of the current path. This is useful for routing.
-
-#### publicPath
-
-The public path prefix as set in webpack's `config.options.publicPath`.
-
-#### stats
-
-The webpack's `stats.toJson()` object. This is useful for [webpack-flush-chunk](https://github.com/faceyspacey/webpack-flush-chunks).
 
 ## Babel
 
 Because your renderer function typically imports your `<App />`, you probably need [babel](https://babeljs.io/). The easiest way is to run your webpack config through babel with `webpack --config webpack.config.babel.js`.
 
-## Working with Hot Reloading
 
-Since version `v5.0.0` the `HTMLRendererWebpackPlugin` accepts the `renderer` option as a path to the renderer function (`string`), and will then dynamically import the function before each renderer. This makes the renderer result be always up-to-date with Hot Reloading.
+## Hot-reloading
 
-For older versions:
-
-### TL;DR
-
-* In your `renderer` function, require your main React component instead of importing:
-  - `const App = require('src/components/App').default`
-* After watch mode recompilation, `require.cache` will be invalidated and using `require` will result in updated code.
-
-### Longer Explanation
-
-A typical feature of a dev environment includes some [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/). When using `html-renderer-webpack-plugin`, you might want to ensure that when the client bundle gets hot-updated, also the HTML files are rendered with the content.
-
-By default, when using `import` to require you application code, for example `import App from 'src/components/App`, the resulting module will be cached in the node process. Thus, after recompiling your html files after a webpack HMR update, the html file will still contain the old version, because it is cached in the `require.cache`.
-
-To overcome this limitation, this plugin hooks into Webpack's `watchRun` hook, that runs in watch mode when files change. It will then invalidate every require used in changed files from the `require.cache`. Thus, if you use `const App = require('src/components/App').default` inside your renderer function, it will be freshly required the next time the HTML file is created. This will result in "hot-reloading" working properly for statically rendered content.
-
-You can disable this behaviour by supplying the `hot: false` option in the plugin constructor.
+The `renderer` option can point to a file (`string`) that will be required before each compilation. This plugin will automatically delete all changed files from the `require.cache`, meaning the emitted html files should always be up-to-date even during `watch` mode.
